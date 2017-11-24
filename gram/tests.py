@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile,Tag
 
 # Create your tests here.
 class ProfileTestClass(TestCase):
@@ -50,6 +50,52 @@ class ProfileTestClass(TestCase):
         profiles = Profile.objects.all()
 
         self.assertTrue( len(gotten_profile) != len(profiles))
+
+class TagTestClass(TestCase):
+    '''
+    Test case for Tag class
+    '''
+
+    # Set Up method
+    def setUp(self):
+        '''
+        Method that sets up a Tag instance before each test
+        '''
+        # Create a Tag instance
+        self.new_tag = Tag(name='Python')
+
+    def test_instance(self):
+        '''
+        Test case to check if self.new_tag in an instance of Tag class
+        '''
+        self.assertTrue( isinstance(self.new_tag, Tag) )
+
+    def test_save_tag(self):
+        '''
+        Test case to check is a tag is saved in the database
+        '''
+        self.new_tag.save_tag()
+        gotten_tags = Tag.objects.all()
+        self.assertTrue( len(gotten_tags) > 0 )
+
+    def test_delete_tag(self):
+        '''
+        Test case to check if a tag is deleted from the database
+        '''
+        self.new_tag.save_tag()
+        gotten_tags = Tag.objects.all()
+        self.new_tag.delete_tag()
+        self.assertTrue( len(gotten_tags) == 0 )
+
+    def test_get_tags(self):
+        '''
+        Test case to check if all tags are gotten from the database
+        '''
+        self.new_tag.save_tag()
+        gotten_tags = Tag.get_tags()
+        existing_tags = Tag.objects.all()
+        self.assertTrue( len(gotten_tags) == len(existing_tags))
+
 
     
 

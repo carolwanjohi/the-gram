@@ -66,6 +66,38 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+class Tag(models.Model):
+    '''
+    Class that defines categories of posts and tags on posts
+    '''
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+    def save_tag(self):
+        '''
+        Method to save a new tag to the database
+        '''
+        self.save()
+
+    def delete_tag(self):
+        '''
+        Method to delete a tag from the database
+        '''
+        self.delete()
+
+    @classmethod
+    def get_tags(cls):
+        '''
+        Method that gets all tags from the database
+
+        Returns:
+            gotten_tags : list of tag objects from the database
+        '''
+        gotten_tags = Tag.objects.all()
+        return gotten_tags
+
 
 
 
