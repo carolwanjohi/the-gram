@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 # Default image for a new profile
-DEFAULT = 'static/images/kakashi.jpg'
+DEFAULT = 'profile-pic/kakashi.jpg'
 
 # Create your models here.
 class Profile(models.Model):
@@ -33,19 +33,19 @@ class Profile(models.Model):
         profiles = Profile.objects.all()
         return profiles
 
-    @classmethod
-    def get_single_profile(cls,user_id):
-        '''
-        Function that get's the profile of the specified user
+    # @classmethod
+    # def get_single_profile(cls,user_id):
+    #     '''
+    #     Function that get's the profile of the specified user
 
-        Args:
-            user_id : id of specific user
+    #     Args:
+    #         user_id : id of specific user
 
-        Return:
-            single_profile : single Profile object belonging to user with specified id
-        '''
-        single_profile = Profile.objects.filter(user=user_id).all()
-        return single_profile
+    #     Return:
+    #         single_profile : single Profile object belonging to user with specified id
+    #     '''
+    #     single_profile = Profile.objects.filter(user=user_id).all()[0]
+    #     return single_profile
 
     # @classmethod
     # def set_profile_pic_to_default(self):
