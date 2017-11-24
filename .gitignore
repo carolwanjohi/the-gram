@@ -1,0 +1,7 @@
+.DS_Store
+virtual/
+*.pyc
+.env
+confusables.json
+categories.json
+db.sqlite3
