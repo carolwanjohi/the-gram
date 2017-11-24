@@ -70,7 +70,7 @@ class Tag(models.Model):
     '''
     Class that defines categories of posts and tags on posts
     '''
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
 
     def __str__(self):
         return self.name
