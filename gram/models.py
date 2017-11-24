@@ -98,6 +98,73 @@ class Tag(models.Model):
         gotten_tags = Tag.objects.all()
         return gotten_tags
 
+class Post(models.Model):
+    '''
+    Class that defines a Post made by a User on their Profile
+    '''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    post_date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to="posts/")
+    caption = models.TextField(blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        '''
+        Order posts with most recent at the top
+        '''
+        ordering = ['-post_date']
+
+    # def save_post(self):
+    #     '''
+    #     Method to save a post to the database
+    #     '''
+    #     self.save()
+
+    @classmethod
+    def get_posts(cls):
+        '''
+        Function that gets all the posts in the database
+
+        Returns:
+            posts : list of all Post objects from the database
+        '''
+        posts = Post.objects.all()
+        return posts
+
+    @classmethod
+    def get_profile_posts(cls,profile_id):
+        '''
+        Function that gets all the posts from a specific profile
+
+        Returns:
+            profile_posts : list of all the posts in a specific profile
+        '''
+        profile_posts = Post.objects.filter(profile=profile_id).all()
+        return profile_posts
+
+class Follow(models.Model):
+    '''
+    Class that store a User and Profile follow status
+    '''
+    user = models.ForeignKey(User)
+    profile = models.ForeignKey(Profile)
+
+    @classmethod
+    def get_following(cls,user_id):
+        '''
+        Function that gets the Follow objects with a specific user id is get_following
+
+        Return
+            following : list of Follow objeect a User is following
+        '''
+        following =  Follow.objects.filter(user=user_id).all()
+        return following
+
+
 
 
 
