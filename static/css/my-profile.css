@@ -1,0 +1,14 @@
+/*Style my profile template*/
+div.row{
+    margin-top: 2em;
+    margin-left: 4em;
+}
+
+img.img-responsive{
+    border-radius: 100%;
+}
+
+h1.username{
+    margin-top: 2.5em;
+    margin-left: 4em;
+}
