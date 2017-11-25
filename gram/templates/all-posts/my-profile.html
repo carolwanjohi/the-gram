@@ -16,15 +16,24 @@
 
     <div class="container">
         
-        <div class="row">
+        <div class="row profileHeaderRow">
+
+            <!-- Empty Div -->
+            <div class="col-md-1 col-lg-1">
+                
+            </div>
+
+            <!-- Profile Pic  -->
             
-            <div class="col-md-4 col-lg-4">
+            <div class="col-md-3 col-lg-3">
                 
                 <img src="{{current_user.profile.profile_pic.url}}" alt="{{current_user.username}}" class="img-responsive">
 
             </div>
 
-            <div class="col-md-8 col-lg-8">
+            <!-- Current user's name -->
+
+            <div class="col-md-7 col-lg-7">
 
                 <h1 class="username">
                     {{current_user.username}}
@@ -32,11 +41,24 @@
 
             </div>
 
+            <!-- Empty Div -->
+            <div class="col-md-1 col-lg-1">
+                
+            </div>
+
         </div>
 
         <hr>
 
         <h1>List of posts</h1>
+
+        <!-- Current User's Posts  -->
+        
+        <div class="col-md-4 col-lg-4">
+            
+            <img src="{{current_user.profile.profile_pic.url}}" alt="{{current_user.username}}" class="img-responsive">
+
+        </div>
         
     </div>
 

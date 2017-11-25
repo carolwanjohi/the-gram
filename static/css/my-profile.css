@@ -1,5 +1,5 @@
 /*Style my profile template*/
-div.row{
+div.row.profileHeaderRow{
     margin-top: 2em;
     margin-left: 4em;
 }
