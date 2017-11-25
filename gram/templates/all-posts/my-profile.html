@@ -27,7 +27,7 @@
             
             <div class="col-md-3 col-lg-3">
                 
-                <img src="{{current_user.profile.profile_pic.url}}" alt="{{current_user.username}}" class="img-responsive">
+                <img src="{{current_user.profile.profile_pic.url}}" alt="{{current_user.username}}" class="img-responsive profilePicture">
 
             </div>
 
@@ -37,6 +37,15 @@
 
                 <h1 class="username">
                     {{current_user.username}}
+                </h1>
+
+                <h1 class="createPost">
+
+                    <a href="{% url 'new-post'%}">
+                        Create Post
+                        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                    </a>
+                    
                 </h1>
 
             </div>
@@ -53,12 +62,19 @@
         <h1>List of posts</h1>
 
         <!-- Current User's Posts  -->
+        {% for post in posts %}
         
         <div class="col-md-4 col-lg-4">
             
-            <img src="{{current_user.profile.profile_pic.url}}" alt="{{current_user.username}}" class="img-responsive">
+            <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive postImage">
+
+            <h5 class="text-center">
+                {{post.caption}}
+            </h5>
 
         </div>
+
+        {% endfor %}
         
     </div>
 
