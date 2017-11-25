@@ -18,18 +18,24 @@ div.container {
     font-size: 2.5em;
     color: #000;
     border-left: 0.05em solid #000;
+    padding-left: 0.75em;
 }
 
-a.navbar-brand.siteIcon, a.navbar-brand.siteName{
+.userIcon, .signOut{
+    font-size: 3em;
     color: #000;
 }
 
-a.navbar-brand.siteIcon:hover, a.navbar-brand.siteName:hover, a.userIcon:hover{
+.signOut {
+    margin-left: 0.5em;
+}
+
+a.navbar-brand.siteIcon, a.navbar-brand.siteName {
+    color: #000;
+}
+
+a.navbar-brand.siteIcon:hover, a.navbar-brand.siteName:hover, a.userIcon:hover, a.signOut:hover{
     color: #000;
     text-decoration: none;
 }
 
-.userIcon{
-    font-size: 3em;
-    color: #000;
-}
