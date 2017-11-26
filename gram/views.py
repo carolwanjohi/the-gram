@@ -26,6 +26,7 @@ def profile(request,id):
     current_user = request.user
 
     try:
+
         single_profile = Profile.objects.get(user=current_user.id)
 
         title = f'{current_user.username}\'s'
@@ -85,7 +86,25 @@ def new_post(request):
         form = NewsPostForm()
 
     title = 'Create Post'
+
     return render(request,'all-posts/new-post.html', {"form":form})
+
+@login_required(login_url='/accounts/register')
+def explore(request,id):
+    '''
+    View function to display a form for creating a post to a logged in authenticated user 
+    '''
+    current_user = request.user
+
+    current_user_profile = current_user.profile
+
+    profiles = Profile.get_other_profiles(current_user.id)
+
+    title = f'{current_user.username} explore'
+
+    return render(request,'all-posts/explore.html',{"title":title,"profiles":profiles})
+
+
 
 
 

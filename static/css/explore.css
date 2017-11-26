@@ -1,0 +1,21 @@
+/*Style Explore template*/
+div.row.profileRow {
+    margin-left: 12em;
+    margin-right: 5em;
+    display: block;
+}
+img.img-responsive.profilePicture{
+    border-radius: 100%;
+    height: 6vh;
+    float: left;
+}
+
+h6.username {
+    margin-left: 5em;
+}
+
+a.follow {
+    margin-left: 9em;
+}
+
+

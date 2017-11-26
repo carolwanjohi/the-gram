@@ -37,6 +37,10 @@
 
                     <div class="navbar-right">
 
+                        <a href="{%url 'explore' user.id%}" class="exploreIcon">
+                            <i class="fa fa-compass" aria-hidden="true"></i>
+                        </a>
+
                         <a href="{% url 'profile' user.id%}" class="userIcon">
                             <i class="glyphicon glyphicon-user"></i>
                         </a>

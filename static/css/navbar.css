@@ -21,20 +21,24 @@ div.container {
     padding-left: 0.75em;
 }
 
-.userIcon, .signOut{
+.userIcon, .signOut, .exploreIcon{
     font-size: 3em;
     color: #000;
 }
 
+.exploreIcon {
+    margin-right: 1em;
+}
+
 .signOut {
-    margin-left: 0.5em;
+    margin-left: 1em;
 }
 
 a.navbar-brand.siteIcon, a.navbar-brand.siteName {
     color: #000;
 }
 
-a.navbar-brand.siteIcon:hover, a.navbar-brand.siteName:hover, a.userIcon:hover, a.signOut:hover{
+a.navbar-brand.siteIcon:hover, a.navbar-brand.siteName:hover, a.userIcon:hover, a.signOut:hover, a.exploreIcon:hover{
     color: #000;
     text-decoration: none;
 }
