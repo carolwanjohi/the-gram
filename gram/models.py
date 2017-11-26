@@ -177,6 +177,9 @@ class Follow(models.Model):
     user = models.ForeignKey(User)
     profile = models.ForeignKey(Profile)
 
+    def __str__(self):
+        return self.user.username
+
     @classmethod
     def get_following(cls,user_id):
         '''
