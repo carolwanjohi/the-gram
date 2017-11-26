@@ -16,6 +16,10 @@
 
     <div class="container">
 
+        <h2 class="text-center">
+            Other Grammers
+        </h2>
+
         <div class="row profileRow">
             
             {%for profile in profiles%}
@@ -31,11 +35,12 @@
                             <img src="{{profile.profile_pic.url}}" alt="{{profile.user.username}}" class="img-responsive profilePicture">
 
                             <h6 class="username">
-                                {{profile.user.username}}  
+                                {{profile.user.username}}
 
-                                <a href="" class="follow">
+                                <a href="{% url 'follow' profile.id%}" class="follow">
                                     Follow
                                 </a>
+
                             </h6>
 
                         </div>

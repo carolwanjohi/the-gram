@@ -14,9 +14,23 @@ def timeline(request):
 
     title = 'Home'
 
-    message = 'Timeline Page'
+    following = Follow.get_following(current_user.id)
 
-    return render(request, 'all-posts/timeline.html', {"title": title, "message": message, "user":current_user})
+    posts = Post.get_posts()
+
+    following_posts = []
+
+    for follow in following:
+
+        for post in posts:
+
+            if follow.profile == post.profile:
+
+                following_posts.append(post)
+
+    print(following_posts)
+
+    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts})
 
 @login_required(login_url='/accounts/register')
 def profile(request,id):
@@ -92,7 +106,7 @@ def new_post(request):
 @login_required(login_url='/accounts/register')
 def explore(request,id):
     '''
-    View function to display a form for creating a post to a logged in authenticated user 
+    View function to display a list of profiles that the current user is not following
     '''
     current_user = request.user
 
@@ -103,6 +117,21 @@ def explore(request,id):
     title = f'{current_user.username} explore'
 
     return render(request,'all-posts/explore.html',{"title":title,"profiles":profiles})
+
+@login_required(login_url='/accounts/register')
+def follow(request,id):
+    '''
+    View function to add a profile to the current user's timeline
+    '''
+    current_user = request.user
+
+    follow_profile = Profile.objects.get(id=id)
+
+    following = Follow(user=current_user, profile=follow_profile)
+
+    following.save()
+
+    return redirect(timeline)
 
 
 

@@ -15,10 +15,56 @@
     {{block.super}}
 
     <div class="container">
-        
-        <h2>
-            {{user.username}} is logged in
-        </h2>
+
+        {%if following_posts%}
+
+        <div class="row profileRow">
+            
+            {%for follow in following_posts%}
+
+                <!-- Profile Div -->
+
+                <div class="col-md-10 col-lg-10">
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+
+                            <img src="{{follow.profile.profile_pic.url}}" alt="{{follow.profile.user.username}}" class="img-responsive profilePicture">
+
+                            <h6 class="username">
+                                {{follow.profile.user.username}}
+                            </h6>
+
+                        </div>
+
+                        <div class="panel-body">
+            
+                            <img src="{{follow.image.url}}" alt="{{follow.caption}}" class="img-responsive postImage">
+
+                            <h5 class="text-center">
+                                {{follow.caption}}
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {%else%}
+
+            <h2 class="text-center">
+                You are Not Following Anyone
+            </h2>
+
+        {%endif%}
+
         
     </div>
 
