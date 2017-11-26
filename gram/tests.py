@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile,Tag,Post, Follow
+from .models import Profile, Tag, Post, Follow, Comment
 
 # Create your tests here.
 class ProfileTestClass(TestCase):
@@ -19,7 +19,6 @@ class ProfileTestClass(TestCase):
         Test case to check if self.new_profile in an instance of Profile class
         '''
         self.assertTrue( isinstance(self.new_profile, Profile) )
-
 
     def test_get_profiles(self):
         '''
@@ -91,7 +90,9 @@ class TagTestClass(TestCase):
         Test case to check is a tag is saved in the database
         '''
         self.new_tag.save_tag()
+
         gotten_tags = Tag.objects.all()
+
         self.assertTrue( len(gotten_tags) > 0 )
 
     def test_delete_tag(self):
@@ -99,8 +100,11 @@ class TagTestClass(TestCase):
         Test case to check if a tag is deleted from the database
         '''
         self.new_tag.save_tag()
+
         gotten_tags = Tag.objects.all()
+
         self.new_tag.delete_tag()
+
         self.assertTrue( len(gotten_tags) == 0 )
 
     def test_get_tags(self):
@@ -108,19 +112,21 @@ class TagTestClass(TestCase):
         Test case to check if all tags are gotten from the database
         '''
         self.new_tag.save_tag()
+
         gotten_tags = Tag.get_tags()
+
         existing_tags = Tag.objects.all()
+
         self.assertTrue( len(gotten_tags) == len(existing_tags))
 
 class PostTestClass(TestCase):
     '''
-    Test case for the Profile class
+    Test case for the Post class
     '''
     def setUp(self):
         '''
         Method that creates an instance of Profile class
         '''
-
         # Create a Post instance
         self.new_post = Post(caption ='Python James is Muriuki who wrote Python content for Moringa School')
 
@@ -135,7 +141,9 @@ class PostTestClass(TestCase):
         Test case to check if all posts are gotten from the database
         '''
         gotten_posts = Post.get_posts()
+
         posts = Post.objects.all()
+
         self.assertTrue( len(gotten_posts) == len(posts))
 
     def test_get_profile_posts(self):
@@ -160,11 +168,11 @@ class PostTestClass(TestCase):
 
 class FollowTestClass(TestCase):
     '''
-    Test case for the Profile class
+    Test case for the Follow class
     '''
     def test_instance(self):
         '''
-        Test case to check if self.new_post in an instance of Post class
+        Test case to check if self.new_post in an instance of Follow class
         '''
         self.james = User(username="kiki")
         self.james.save()
@@ -180,7 +188,7 @@ class FollowTestClass(TestCase):
 
     def test_get_following(self):
         '''
-        Test case to test get following is getting profiles a specific user is following
+        Test case to check if get following is getting profiles a specific user is following
         '''
         self.james = User(username="kiki")
         self.james.save()
@@ -199,6 +207,46 @@ class FollowTestClass(TestCase):
         followings = Follow.objects.all()
 
         self.assertTrue( len(gotten_following) == len(followings))
+
+class CommentTestClass(TestCase):
+    '''
+    Test case for the Comment class
+    '''
+    def setUp(self):
+        '''
+        Method that creates an instance of Comment class
+        '''
+        # Create a Comment instance
+        self.new_comment = Comment(comment_content ='Python James is Muriuki who wrote Python content for Moringa School')
+
+    def test_instance(self):
+        '''
+        Test case to check if self.new_comment in an instance of Comment class
+        '''
+        self.assertTrue( isinstance(self.new_comment, Comment) )
+
+    def test_get_post_comments(self):
+        '''
+        Test case to check if get post comments is getting comments for a specific post
+        '''
+        self.james = User(username="kiki")
+        self.james.save()
+
+        self.jane = User(username="ja-ne")
+        self.jane.save()
+
+        self.test_profile = Profile(user=self.jane,bio="Another Profile")
+
+        self.test_post = Post(user=self.jane,caption="Another Profile")
+
+        self.test_comment = Comment(post=self.test_post,comment_content="Wow")
+
+        gotten_comments = Comment.get_post_comments(self.test_post.id)
+
+        comments = Comment.objects.all()
+
+        # No comments were saved so expect True
+        self.assertTrue( len(gotten_comments) == len(comments))
 
 
 

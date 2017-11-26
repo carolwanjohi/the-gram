@@ -13,7 +13,9 @@ class Profile(models.Model):
     Class to define a user's profile
     '''
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
     bio = models.TextField(blank=True)
+
     profile_pic = models.ImageField(upload_to="profile-pic/", blank=True, default=DEFAULT)
 
     def __str__(self):
@@ -31,6 +33,7 @@ class Profile(models.Model):
             profiles : list of all Profile obejcts in the database
         '''
         profiles = Profile.objects.all()
+
         return profiles
 
     @classmethod
@@ -85,6 +88,7 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+        
 # Save Profile when saving a User
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -120,6 +124,7 @@ class Tag(models.Model):
             gotten_tags : list of tag objects from the database
         '''
         gotten_tags = Tag.objects.all()
+
         return gotten_tags
 
 class Post(models.Model):
@@ -127,10 +132,15 @@ class Post(models.Model):
     Class that defines a Post made by a User on their Profile
     '''
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
     post_date = models.DateTimeField(auto_now_add=True)
+
     image = models.ImageField(upload_to="posts/")
+
     caption = models.TextField(blank=True)
+
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
@@ -157,6 +167,7 @@ class Post(models.Model):
             posts : list of all Post objects from the database
         '''
         posts = Post.objects.all()
+
         return posts
 
     @classmethod
@@ -168,6 +179,7 @@ class Post(models.Model):
             profile_posts : list of all the posts in a specific profile
         '''
         profile_posts = Post.objects.filter(profile=profile_id).all()
+
         return profile_posts
 
 class Follow(models.Model):
@@ -175,6 +187,7 @@ class Follow(models.Model):
     Class that store a User and Profile follow status
     '''
     user = models.ForeignKey(User)
+
     profile = models.ForeignKey(Profile)
 
     def __str__(self):
@@ -189,8 +202,36 @@ class Follow(models.Model):
             following : list of Follow objeect a User is following
         '''
         following =  Follow.objects.filter(user=user_id).all()
+
         return following
 
+class Comment(models.Model):
+    '''
+    Class that defines a Comment on a Post
+    '''
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+
+    comment_content = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    @classmethod
+    def get_post_comments(cls,post_id):
+        '''
+        Function that gets all the comments belonging to a single post
+
+        Args:
+            post_id : specific post
+
+        Returns:
+            comments : List of Comment objects for the specified post
+        '''
+        post_comments = Comment.objects.filter(post=post_id)
+
+        return post_comments
 
 
 
