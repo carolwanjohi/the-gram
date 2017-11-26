@@ -273,7 +273,8 @@ class Like(models.Model):
         Returns:
             found_likes : number of likes a post has
         '''
-        found_likes = sum([i.likes_number for i in Like.objects.filter(post=post_id)])
+        post = Like.objects.filter(post=post_id)
+        found_likes = post.aggregate(Sum('likes_number')).get('likes_number__sum',0)
 
         return found_likes
 
