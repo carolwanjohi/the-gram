@@ -33,6 +33,30 @@ class Profile(models.Model):
         profiles = Profile.objects.all()
         return profiles
 
+    @classmethod
+    def get_other_profiles(cls,user_id):
+        '''
+        Function that gets profiles of other people except the profile for the current user
+
+        Args:
+            user_id : the current user id
+
+        Returns
+            profiles : list of Profile objects excluding the current users's profile
+        '''
+
+        profiles = Profile.objects.all()
+
+        other_profiles = []
+
+        for profile in profiles:
+
+            if profile.user.id == user_id:
+
+                other_profiles.append(profile)
+
+        return other_profiles
+
     # @classmethod
     # def get_single_profile(cls,user_id):
     #     '''
