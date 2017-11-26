@@ -40,7 +40,13 @@ def timeline(request):
 
                 post_comments.append(comment)
 
-    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts,"post_comments":post_comments})
+    likes = []
+    
+    for post in following_posts:
+
+        likes.append(Like.num_likes(post.id))
+
+    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts,"post_comments":post_comments,"likes":likes})
 
 @login_required(login_url='/accounts/register')
 def profile(request,id):
@@ -175,6 +181,21 @@ def comment(request,id):
     title = f'Comment {current_post.user.username}\'s Post'
 
     return render(request,'all-posts/new-comment.html', {"title":title,"form":form,"current_post":current_post})
+
+@login_required(login_url='/accounts/register')
+def like(request,id):
+    '''
+    View function add a like to a post the current user has liked
+    '''
+    current_user = request.user
+
+    current_post = Post.objects.get(id=id)
+
+    like = Like(user=current_user,post=current_post,likes_number=1)
+
+    like.save()
+
+    return redirect(timeline)
 
 
 

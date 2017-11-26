@@ -9,7 +9,8 @@ urlpatterns = [
     url( r'^create/post', views.new_post, name="new-post"),
     url( r'^explore/(\d+)', views.explore, name="explore"),
     url( r'^follow/(\d+)', views.follow, name="follow"),
-    url( r'^create/comment(\d+)', views.comment, name="comment" )
+    url( r'^create/comment(\d+)', views.comment, name="comment" ),
+    url( r'^like/(\d+)', views.like, name="like"),
 ]
 
 if settings.DEBUG:

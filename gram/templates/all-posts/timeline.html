@@ -47,6 +47,25 @@
                                 {{follow.caption}}
                             </h5>
 
+                            {%if likes%}
+
+                                <i class="fa fa-heart" aria-hidden="true"></i>
+
+                                {% for like in likes%}
+                                    {{like}}
+                                {%endfor%}
+
+                            {%else%}
+
+                                <a href="{%url 'like' follow.id%}">
+                                    
+                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
+
+                                </a>
+
+
+                            {%endif%}
+
                             {%for comment in post_comments%}
 
                                 <h5>
