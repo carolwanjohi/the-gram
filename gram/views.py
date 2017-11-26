@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Tag, Post, Follow
-from .forms import NewsPostForm
+from .models import Profile, Tag, Post, Follow, Comment, Like
+from .forms import NewsPostForm, NewCommentForm
 
 # Create your views here.
 @login_required(login_url='/accounts/register')
@@ -28,9 +28,19 @@ def timeline(request):
 
                 following_posts.append(post)
 
-    print(following_posts)
+    comments = Comment.objects.all()
 
-    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts})
+    post_comments = []
+
+    for comment in comments:
+
+        for post in posts:
+
+            if comment.post.id == post.id:
+
+                post_comments.append(comment)
+
+    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts,"post_comments":post_comments})
 
 @login_required(login_url='/accounts/register')
 def profile(request,id):
@@ -132,6 +142,40 @@ def follow(request,id):
     following.save()
 
     return redirect(timeline)
+
+@login_required(login_url='/accounts/register')
+def comment(request,id):
+    '''
+    View function to display a form for creating a comment on a post
+    '''
+    current_user = request.user
+
+    current_post = Post.objects.get(id=id)
+
+    if request.method == 'POST':
+
+        form = NewCommentForm(request.POST)
+
+        if form.is_valid:
+
+            comment = form.save(commit=False)
+
+            comment.user = current_user
+
+            comment.post = current_post
+
+            comment.save()
+
+            return redirect(timeline)
+
+    else:
+
+        form = NewCommentForm()
+
+    title = f'Comment {current_post.user.username}\'s Post'
+
+    return render(request,'all-posts/new-comment.html', {"title":title,"form":form,"current_post":current_post})
+
 
 
 

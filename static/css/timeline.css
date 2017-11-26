@@ -20,3 +20,21 @@ img.img-responsive.postImage{
     margin-right: auto;
     display: block;
 }
+
+img.img-responsive.commentProfilePicture{
+    border-radius: 100%;
+    height: 4vh;
+    float: left;
+}
+
+span.commenterName {
+    margin-left: 0.5em;
+}
+
+span.commentContent {
+    margin-left: 1.75em;
+}
+
+h3.commentLink > a:hover {
+    text-decoration: none;
+}
