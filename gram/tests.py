@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import Profile, Tag, Post, Follow, Comment
+from .models import Profile, Tag, Post, Follow, Comment, Like
 
 # Create your tests here.
 class ProfileTestClass(TestCase):
@@ -247,6 +247,42 @@ class CommentTestClass(TestCase):
 
         # No comments were saved so expect True
         self.assertTrue( len(gotten_comments) == len(comments))
+
+class LikeTestClass(TestCase):
+    '''
+    Test class to test the Like class
+    '''
+
+    def setUp(self):
+        '''
+        Set up method that will run before every Test
+        '''
+        # Create a Like instance
+        self.new_like = Like(likes_number=0 )
+
+    def test_instance(self):
+        '''
+        Test case to check if self.new_like is an instance of Like
+        '''
+
+        self.assertTrue( isinstance( self.new_like, Like) )
+
+    def test_get_post_likes(self):
+        '''
+        Test case to check if get post likes is getting the likes for a specific post
+        '''
+
+        gotten_likes = Like.get_post_likes(4990826417581240726341234)
+
+        self.assertFalse( len(gotten_likes) , 1)
+
+    def test_num_likes(self):
+        '''
+        Test to check if num likes is getting the number of likes a post is getting
+        '''
+        gotten_likes = Like.num_likes(123412312351123412341234123412341234)
+
+        self.assertEqual( gotten_likes , 0)
 
 
 

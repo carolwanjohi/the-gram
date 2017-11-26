@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 import datetime as dt
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.db.models import Sum
 
 # Default image for a new profile
 DEFAULT = 'profile-pic/kakashi.jpg'
@@ -88,7 +89,7 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
-        
+
 # Save Profile when saving a User
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
@@ -232,6 +233,51 @@ class Comment(models.Model):
         post_comments = Comment.objects.filter(post=post_id)
 
         return post_comments
+
+class Like(models.Model):
+    '''
+    Class that define the likes a post gets
+    '''
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+
+    likes_number = models.PositiveIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
+    @classmethod
+    def get_post_likes(cls,post_id):
+        '''
+        Function that gets the likes belonging to a specified post
+
+        Args:
+            post_id : specific post
+
+        Returns:
+            post_likes : List of Like objects for the specified post
+        '''
+        post_likes = Like.objects.filter(post=post_id)
+
+        return post_likes
+
+    @classmethod
+    def num_likes(cls,post_id):
+        '''
+        Function that gets the total number of likes a post has
+
+        Args:
+            post_id : specific post
+
+        Returns:
+            found_likes : number of likes a post has
+        '''
+        found_likes = sum([i.likes_number for i in Like.objects.filter(post=post_id)])
+
+        return found_likes
+
+
 
 
 
