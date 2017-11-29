@@ -41,8 +41,26 @@
                         <h5 class="text-center">
                             {{post.caption}}
                         </h5>
+                        
+                        {{likes}}
+
+
+                        {% if like %}
+
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+
+                        {% else %}
+
+                            <a href="{%url 'like' post.id%}">
+                                    
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+
+                            </a>
+
+                        {% endif %}
 
                         {% for comment in comments %}
+
                            <h5>
 
                                 <img src="{{comment.user.profile.profile_pic.url}}" alt="{{comment.user.username}}" class="img-responsive commentProfilePicture">
@@ -60,6 +78,7 @@
                                 </span>
 
                             </h5>
+
                         {% empty %}
 
                             <h6>

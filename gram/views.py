@@ -28,25 +28,7 @@ def timeline(request):
 
                 following_posts.append(post)
 
-    comments = Comment.objects.all()
-
-    post_comments = []
-
-    for comment in comments:
-
-        for post in posts:
-
-            if comment.post.id == post.id:
-
-                post_comments.append(comment)
-
-    likes = []
-    
-    for post in following_posts:
-
-        likes.append(Like.num_likes(post.id))
-
-    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts,"post_comments":post_comments,"likes":likes})
+    return render(request, 'all-posts/timeline.html', {"title": title, "following": following, "user":current_user, "following_posts":following_posts})
 
 @login_required(login_url='/accounts/register')
 def profile(request,id):
@@ -195,13 +177,14 @@ def like(request,id):
 
     like.save()
 
-    return redirect(timeline)
+    return redirect(post,current_post.id)
 
 @login_required(login_url='/accounts/register')
 def post(request,id):
     '''
     View function to display a single post, its comments and likes
     '''
+    current_user = request.user
     try:
         current_post = Post.objects.get(id=id)
 
@@ -211,10 +194,12 @@ def post(request,id):
 
         likes = Like.num_likes(id)
 
+        like = Like.objects.filter(post=id).filter(user=current_user)
+
     except DoesNotExist:
         raise Http404()
 
-    return render(request, 'all-posts/post.html', {"title":title, "post":current_post,"comments":comments,"likes":likes })
+    return render(request, 'all-posts/post.html', {"title":title, "post":current_post,"comments":comments,"likes":likes,"like":like })
 
 
 
