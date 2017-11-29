@@ -172,7 +172,7 @@ def comment(request,id):
 
             comment.save()
 
-            return redirect(timeline)
+            return redirect(post,current_post.id)
 
     else:
 
