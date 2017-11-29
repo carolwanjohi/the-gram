@@ -11,6 +11,7 @@ urlpatterns = [
     url( r'^follow/(\d+)', views.follow, name="follow"),
     url( r'^create/comment(\d+)', views.comment, name="comment" ),
     url( r'^like/(\d+)', views.like, name="like"),
+    url( r'^post/(\d+)', views.post, name="post"),
 ]
 
 if settings.DEBUG:

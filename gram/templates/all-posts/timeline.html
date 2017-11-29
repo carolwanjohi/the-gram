@@ -40,70 +40,16 @@
                         </div>
 
                         <div class="panel-body">
+
+                            <a href="{%url 'post' follow.id%}">
             
-                            <img src="{{follow.image.url}}" alt="{{follow.caption}}" class="img-responsive postImage">
+                                <img src="{{follow.image.url}}" alt="{{follow.caption}}" class="img-responsive postImage">
 
-                            <h5 class="text-center">
-                                {{follow.caption}}
-                            </h5>
-
-                            {%if likes%}
-
-                                <i class="fa fa-heart" aria-hidden="true"></i>
-
-                                {% for like in likes%}
-                                    {{like}}
-                                {%endfor%}
-
-                            {%else%}
-
-                                <a href="{%url 'like' follow.id%}">
-                                    
-                                    <i class="fa fa-heart-o" aria-hidden="true"></i>
-
-                                </a>
-
-
-                            {%endif%}
-
-                            {%for comment in post_comments%}
-
-                                <h5>
-
-                                    <img src="{{comment.user.profile.profile_pic.url}}" alt="{{comment.user.username}}" class="img-responsive commentProfilePicture">
-
-                                    <span class="commenterName">
-
-                                        {{comment.user.username}}
-                                        
-                                    </span>
-
-                                    <span class="commentContent">
-
-                                        {{comment.comment_content}}
-
-                                    </span>
-
-                                    
-
+                                <h5 class="text-center">
+                                    {{follow.caption}}
                                 </h5>
 
-                            {%empty%}
-
-                                <h6>
-                                    No comments
-                                </h6>
-
-                            {%endfor%}
-
-                            
-                            <h3 class="commentLink">
-
-                                <a href="{%url 'comment' follow.id%}">
-                                    Comment
-                                </a>
-
-                            </h3>
+                            </a>
 
                         </div>
 

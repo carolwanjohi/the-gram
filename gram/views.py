@@ -197,6 +197,29 @@ def like(request,id):
 
     return redirect(timeline)
 
+@login_required(login_url='/accounts/register')
+def post(request,id):
+    '''
+    View function to display a single post, its comments and likes
+    '''
+    try:
+        current_post = Post.objects.get(id=id)
+
+        title = f'{current_post.user.username}\'s post'
+
+        comments = Comment.get_post_comments(id)
+
+        likes = Like.num_likes(id)
+
+    except DoesNotExist:
+        raise Http404()
+
+    return render(request, 'all-posts/post.html', {"title":title, "post":current_post,"comments":comments,"likes":likes })
+
+
+
+
+
 
 
 

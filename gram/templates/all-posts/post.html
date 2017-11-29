@@ -1,0 +1,55 @@
+{% extends 'all-posts/base.html' %}
+{% load staticfiles%}
+{% load bootstrap3%}
+
+<!-- Styles block -->
+{% block styles %}
+
+    {{block.super}}
+    <link rel="stylesheet" href="{% static 'css/post.css'%}">
+
+{% endblock %}
+
+<!-- Content block -->
+{% block content %}
+
+    {{block.super}}
+
+    <div class="container">
+
+        <div class="row postRow">
+           <!-- Post Div -->
+
+            <div class="col-md-10 col-lg-10">
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+
+                        <img src="{{post.profile.profile_pic.url}}" alt="{{post.profile.user.username}}" class="img-responsive profilePicture">
+
+                        <h6 class="username">
+                            {{post.profile.user.username}}
+                        </h6>
+
+                    </div>
+
+                    <div class="panel-body">
+        
+                        <img src="{{post.image.url}}" alt="{{post.caption}}" class="img-responsive postImage">
+
+                        <h5 class="text-center">
+                            {{post.caption}}
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+/*Style Post template*/
+div.row.postRow {
+    margin-left: 12em;
+    margin-right: 5em;
+    display: block;
+}
+
+img.img-responsive.profilePicture{
+    border-radius: 100%;
+    height: 6vh;
+    float: left;
+}
+
+h6.username {
+    margin-left: 5em;
+}
+
+img.img-responsive.postImage{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+img.img-responsive.commentProfilePicture{
+    border-radius: 100%;
+    height: 4vh;
+    float: left;
+}
+
+span.commenterName {
+    margin-left: 0.5em;
+}
+
+span.commentContent {
+    margin-left: 1.75em;
+}
+
+h3.commentLink > a:hover {
+    text-decoration: none;
+}
