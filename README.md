@@ -45,8 +45,6 @@ This requires internet connection.
 
 ## Known Bugs
 
-* commenting on a post
-* liking a post
 * lack of downloading feature
 * some features not working on the deployed site
 
