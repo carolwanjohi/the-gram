@@ -37,16 +37,49 @@ As a user I would like:
 
 ## Setup/Installation Requirements
 
-* Click [The Gram](https://django-the-gram.herokuapp.com/) <br/>
-  or <br/>
-* Copy [The Gram](https://django-the-gram.herokuapp.com/) and  Paste the link on your prefered browser
+### Prerequisites
+* Python 3.6.2
+* Virtual environment
+* Postgres Database
+* Internet
 
-This requires internet connection.
+
+### Installation Process
+1. Copy repolink
+2. Run `git clone REPO-URL` in your terminal
+3. Write `cd the-gram`
+4. Create a virtual environment with `virtualenv virtual` or try `python3.6 -m venv virtual`
+5. Create .env file `touch .env` and add the following:
+```
+SECRET_KEY=<your secret key>
+DEBUG=True
+```
+6. Enter your virtual environment `source virtual/bin/activate`
+7. Run `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
+8. Create Postgres Database
+
+```
+psql
+CREATE DATABASE gram
+```
+9. Change the database informatioin in `car/settings.py` 
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'gram',
+        'USER': *POSTGRES_USERNAME*,
+        'PASSWORD': *POSTGRES_USERNAME*,
+    }
+}
+``` 
+10. Run `./manage.py runserver` or `python3.6 manage.py runserver` to run the application
+
 
 ## Known Bugs
 
-* lack of downloading feature
-* some features not working on the deployed site
+* download feature missing
+
 
 ## Technologies Used
 - Python3.6
