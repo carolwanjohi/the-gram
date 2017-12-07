@@ -17,5 +17,8 @@ h6.username {
 a.follow {
     margin-left: 9em;
 }
+a.follow:hover {
+    text-decoration: none;
+}
 
 

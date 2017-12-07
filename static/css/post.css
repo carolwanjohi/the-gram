@@ -11,8 +11,14 @@ img.img-responsive.profilePicture{
     float: left;
 }
 
-h6.username {
+h6.username, h6.timeSince {
     margin-left: 5em;
+}
+
+h6.timeSince {
+    display: inline;
+    float: right;
+    margin-top: -3.25%;
 }
 
 img.img-responsive.postImage{

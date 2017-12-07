@@ -11,8 +11,26 @@ img.img-responsive.profilePicture{
     float: left;
 }
 
-h6.username {
+h6.username, h6.timeSince {
     margin-left: 5em;
+}
+
+h6.timeSince {
+    display: inline;
+    float: right;
+    margin-top: -3.25%;
+}
+
+/*div.panel-body > a {
+    color: #000;
+}*/
+
+h5.text-center {
+    font-size: 2em;
+}
+
+div.panel-body > a:hover {
+    text-decoration: none;
 }
 
 img.img-responsive.postImage{
@@ -20,7 +38,7 @@ img.img-responsive.postImage{
     margin-right: auto;
     display: block;
 }
-
+/*
 img.img-responsive.commentProfilePicture{
     border-radius: 100%;
     height: 4vh;
@@ -37,4 +55,4 @@ span.commentContent {
 
 h3.commentLink > a:hover {
     text-decoration: none;
-}
+}*/

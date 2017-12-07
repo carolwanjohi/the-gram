@@ -112,9 +112,25 @@ def explore(request,id):
 
     profiles = Profile.get_other_profiles(current_user.id)
 
+    following = Follow.objects.filter(user=current_user)
+
+    following_profile_list = []
+
+    for follow in following:
+
+        following_profile_list.append(follow.profile)
+
+    profiles_list = []
+
+    for profile in profiles:
+
+        if profile not in following_profile_list:
+
+            profiles_list.append(profile)
+
     title = f'{current_user.username} explore'
 
-    return render(request,'all-posts/explore.html',{"title":title,"profiles":profiles})
+    return render(request,'all-posts/explore.html',{"title":title,"profiles":profiles_list})
 
 @login_required(login_url='/accounts/register')
 def follow(request,id):
