@@ -12,6 +12,7 @@ urlpatterns = [
     url( r'^create/comment(\d+)', views.comment, name="comment" ),
     url( r'^like/(\d+)', views.like, name="like"),
     url( r'^post/(\d+)', views.post, name="post"),
+    url( r'^download/post-image/(\d+)', views.download, name="download"),
 ]
 
 if settings.DEBUG:

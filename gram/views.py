@@ -1,8 +1,12 @@
 from django.shortcuts import render,redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Tag, Post, Follow, Comment, Like
 from .forms import NewsPostForm, NewCommentForm
+from wsgiref.util import FileWrapper
+import mimetypes
+from django.conf import settings
+import os
 
 # Create your views here.
 @login_required(login_url='/accounts/register')
@@ -216,6 +220,29 @@ def post(request,id):
         raise Http404()
 
     return render(request, 'all-posts/post.html', {"title":title, "post":current_post,"comments":comments,"likes":likes,"like":like })
+
+def download(request,id):
+    '''
+    Function to download a photo
+    '''
+    photo = Post.objects.get(id=id)
+
+    image_file_name = photo.image.name
+
+    image_file_path = os.path.join(settings.MEDIA_ROOT, image_file_name)  
+
+    wrapper = FileWrapper(open(image_file_path, 'rb'))
+
+    image_content_type = mimetypes.guess_type(image_file_path)[0]
+
+    response = HttpResponse(wrapper, content_type='image_content_type')
+
+    response['Content-Disposition'] = "attachment; filename=%s" % image_file_name
+
+    return response
+
+    # print(response)
+
 
 
 
