@@ -78,7 +78,7 @@ DATABASES = {
 
 ## Known Bugs
 
-* download feature missing
+No known bugs
 
 
 ## Technologies Used
