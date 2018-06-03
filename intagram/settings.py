@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'instagram',
-        'USER': ,
-        'PASSWORD': 
+        'USER': config('USER'),
+        'PASSWORD': config('PASSWORD'),
     }
 }
 
