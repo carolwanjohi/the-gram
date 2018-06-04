@@ -61,7 +61,7 @@ PASSWORD=<your postgresql password>
 * Create Postgres Database
 ```
 psql
-CREATE DATABASE instagram
+CREATE DATABASE instagram;
 ```
 ### Running the application
 ```
