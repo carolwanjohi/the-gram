@@ -1,8 +1,8 @@
 # The Gram
-## This is a photo posting website created using Django., 24/11/2017
+#### This is a photo posting website created using Django., 24/11/2017
 
 
-## By **[Carol Wanjohi](https://github.com/carolwanjohi)**
+#### By **[Carol Wanjohi](https://github.com/carolwanjohi)**
 
 ## Description
 [This](https://django-the-gram.herokuapp.com/) is a photo posting website created using Django. A user with an account can:
@@ -45,36 +45,33 @@ As a user I would like:
 
 
 ### Installation Process
-1. Copy repolink
-2. Run `git clone REPO-URL` in your terminal
-3. Write `cd the-gram`
-4. Create a virtual environment with `virtualenv virtual` or try `python3.6 -m venv virtual`
-5. Create .env file `touch .env` and add the following:
+```
+git clone https://github.com/carolwanjohi/the-gram.git && cd cd the-gram
+virtualenv virtual or python3.6 -m venv virtual
+source virtual/bin/activate
+pip3 install -r requirements.txt
+```
+* Create .env file `touch .env` and add the following:
 ```
 SECRET_KEY=<your secret key>
 DEBUG=True
+USER=<your postgresql username>
+PASSWORD=<your postgresql password>
 ```
-6. Enter your virtual environment `source virtual/bin/activate`
-7. Run `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
-8. Create Postgres Database
-
+* Create Postgres Database
 ```
 psql
-CREATE DATABASE gram
+CREATE DATABASE instagram;
 ```
-9. Change the database informatioin in `car/settings.py` 
+### Running the application
 ```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'gram',
-        'USER': *POSTGRES_USERNAME*,
-        'PASSWORD': *POSTGRES_USERNAME*,
-    }
-}
-``` 
-10. Run `./manage.py runserver` or `python3.6 manage.py runserver` to run the application
+./manage.py runserver or python3.6 manage.py runserver
+```
 
+### Running the tests
+```
+./manage.py test or python3.6 manage.py test
+```
 
 ## Known Bugs
 
