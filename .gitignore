@@ -6,3 +6,5 @@ confusables.json
 categories.json
 db.sqlite3
 .env
+gram/
+intagram/
